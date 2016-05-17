@@ -3,7 +3,7 @@ var bio = {
 	"role": "Business Anaylst",
 	"contacts": {
 		"mobile": "914-522-1287",
-		"email": "leogen17@gmail.com",
+		"email": "me@leogenerali.com",
 		"github": "leo-generali",
 		"twitter": "@itsleeohgee",
 		"location": "Washington, DC"
@@ -24,7 +24,7 @@ var education = {
 		"url": "http://fandm.edu"        
 	}],
 
-	"onlineCourse": [
+	"onlineCourses": [
 	{
 		"title": "Front-End Nanodegree",
 		"school": "Udacity",
@@ -40,21 +40,21 @@ var work = {
 		"title": "Business Analytics",
 		"location": "Washington, DC",
 		"dates": "August 2015 - Current",
-		"description": "Lorem ipsum"
+		"description": "I assist with program management on Truven Health’s Innovation Accelerator (IAP) project, a joint program between Center for Medicaid and CHIP Services (CMCS) and the Center for Medicare & Medicaid Innovation (CMMI)."
 	},
 	{
 		"employer": "ConciergeStat (Formally BoardRounds)",
 		"title": "Marketing Intern",
 		"location": "New York City",
 		"dates": "Summer 2015",
-		"description": "Lorem ipsum"
+		"description": "BoardRounds (now ConciergeStat) is a company that offers healthcare providers a service to reduce ED readmission. This software can also be used to conduct analysis of patients based on a variety of metrics. In this role I was responsible for the following: working with CEO to develope a 3 month summer sales plan, identifying and contacting sales lead to create opportunities for partnerships with hospitals and healthcare systems, and analyzing customer use patterns for engineering team to make updates to software."
 	},
 	{
 		"employer": "Sandbox Strategies",
 		"title": "Summer PR Associate",
 		"location": "New York City",
 		"dates": "Summer 2014",
-		"description": "Lorem ipsum"
+		"description": "I assisted in the execution of PR plans for world-class videogame companies like Telltale Games, Activision, SteelSeries, Lima Sky, and Crytek, revised and created fact sheets for review copies of titles, updated and tracked game press kits, and created press releases drafts for upcoming video games"
 	}
 	]
 }
@@ -64,12 +64,12 @@ var project = {
 	{
 		"title": "First Project",
 		"dates": "2016",
-		"description": "This project did this."
+		"description": "The first project I feel comfortable sharing with the world is this website. It was created using a mix of HTML, CSS, and Javascript (jQuery)."
 	},
 	{
 		"title": "Second Project",
 		"dates": "2016",
-		"description": "This project did that."
+		"description": "When I come up with an amazing second project I will be adding it here."
 	}
 	]
 }
@@ -98,6 +98,11 @@ function displayBio(){
 	$("#topContacts").append(formattedGithub);
 	$("#topContacts").append(formattedTwitter);
 	$("#topContacts").append(formattedLocation);
+
+	$("#footerContacts").append(formattedEmail);
+	$("#footerContacts").append(formattedTwitter);
+	$("#footerContacts").append(formattedMobile);
+
 }
 
 displayBio();
@@ -167,12 +172,14 @@ function displayEducation(){
 		$(".education-entry:last").append(formattedSchoolLocation);
 		$(".education-entry:last").append(formattedSchoolMajor);
 	};
-	for (onlineEdu in education.onlineCourse){
+
+	for (onlineEdu in education.onlineCourses){
 		$("#education").append(HTMLonlineClasses);
-		var formattedOnlineTitle = HTMLonlineTitle.replace("%data%", education.onlineCourse[onlineEdu].title);
-		var formattedOnlineSchool = HTMLonlineSchool.replace("%data%", education.onlineCourse[onlineEdu].school);
-		var formattedOnlineDates = HTMLonlineDates.replace("%data%", education.onlineCourse[onlineEdu].dates);
-		var formattedOnlineURL = HTMLonlineURL.replace("%data%", education.onlineCourse[onlineEdu].URL);
+		$("#education").append(HTMLschoolStart);
+		var formattedOnlineTitle = HTMLonlineTitle.replace("%data%", education.onlineCourses[onlineEdu].title);
+		var formattedOnlineSchool = HTMLonlineSchool.replace("%data%", education.onlineCourses[onlineEdu].school);
+		var formattedOnlineDates = HTMLonlineDates.replace("%data%", education.onlineCourses[onlineEdu].date);
+		var formattedOnlineURL = HTMLonlineURL.replace("%data%", education.onlineCourses[onlineEdu].url);
 		var formattedOnlineCourse = formattedOnlineTitle + formattedOnlineSchool;
 
 		$(".education-entry:last").append(formattedOnlineCourse);
@@ -183,8 +190,15 @@ function displayEducation(){
 
 displayEducation();
 
-
 $("#mapDiv").append(googleMap);
+
+function displayContactInfo(){
+	for(info in bio.contacts){
+		$("#lets-connect").append(HTMLschoolStart);
+	}
+}
+
+
 
 $(document).click(function(loc) {
 	logClicks(loc.pageX, loc.pageY);
