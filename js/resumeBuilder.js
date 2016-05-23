@@ -181,6 +181,12 @@ projects.display = function(){
 		$(".project-entry:last").append(formattedTitle);
 		$(".project-entry:last").append(formattedDates);
 		$(".project-entry:last").append(formattedDescription);
+
+		for(imgLength = 0; imgLength < projects.projects[proj].images.length; imgLength++){
+			var formattedImages = HTMLprojectImage.replace("%data%", projects.projects[proj].images[imgLength]);
+			$(".project-entry:last").append(formattedImages);
+		}
+		
 	}
 }; 
 
