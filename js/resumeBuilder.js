@@ -9,9 +9,9 @@ var bio = {
 		"location": "Washington, DC"
 	}, 
 	"welcomeMessage": "What's popping slime?",
-	"skills": ["HTML", "CSS", "JavaScript", "Project Management", "jQuery", "Bootstrap",],
+	"skills": ["HTML", "CSS", "JavaScript", "Project Management", "jQuery", "Bootstrap"],
 	"biopic": "images/color_prof.jpg"
-}
+};
 
 var education = {
 	"schools": [
@@ -19,7 +19,7 @@ var education = {
 		"name": "Franklin and Marshall College",
 		"location": "Lancaster, PA",
 		"degree": "B.A.",
-		"major": ["Business, Organization, and Society"],
+		"majors": ["Business, Organization, and Society"],
 		"dates": "2011 - 2015",
 		"url": "http://fandm.edu"        
 	}],
@@ -31,7 +31,7 @@ var education = {
 		"date": "2016",
 		"url": "http://udacity.com"
 	}]
-}
+};
 
 var work = {
 	"jobs": [
@@ -57,24 +57,27 @@ var work = {
 		"description": "I assisted in the execution of PR plans for world-class videogame companies like Telltale Games, Activision, SteelSeries, Lima Sky, and Crytek, revised and created fact sheets for review copies of titles, updated and tracked game press kits, and created press releases drafts for upcoming video games"
 	}
 	]
-}
+};
 
 var project = {
 	"projects": [
 	{
 		"title": "First Project",
 		"dates": "2016",
-		"description": "The first project I feel comfortable sharing with the world is this website. It was created using a mix of HTML, CSS, and Javascript (jQuery)."
+		"description": "The first project I feel comfortable sharing with the world is this website. It was created using a mix of HTML, CSS, and Javascript (jQuery).",
+		"images" : ["http://placehold.it/150x150", "http://placehold.it/150x150"]
 	},
 	{
 		"title": "Second Project",
 		"dates": "2016",
-		"description": "When I come up with an amazing second project I will be adding it here."
+		"description": "When I come up with an amazing second project I will be adding it here.",
+		"images" : ["http://placehold.it/150x150", "http://placehold.it/150x150"]
 	}
 	]
-}
+};
 
-function displayBio(){
+
+bio.display = function(){
 	var formattedName = HTMLheaderName.replace("%data%", bio.name);
 	var formattedRole = HTMLheaderRole.replace("%data%", bio.role);
 
@@ -103,22 +106,46 @@ function displayBio(){
 	$("#footerContacts").append(formattedTwitter);
 	$("#footerContacts").append(formattedMobile);
 
-}
-
-displayBio();
-
-function displaySkills(){
 	$("#header").append(HTMLskillsStart);
 
 	for(skill in bio.skills){
 		var formattedSkill = HTMLskills.replace("%data%", bio.skills[skill]);
 		$("#skills").append(formattedSkill);
 	}
-}
+};
 
-displaySkills()
+education.display = function(){
+	for (edu in education.schools){
+		$("#education").append(HTMLschoolStart);
+		var formattedSchoolName = HTMLschoolName.replace("%data%", education.schools[edu].name);
+		var formattedSchoolDegree = HTMLschoolDegree.replace("%data%", education.schools[edu].degree);
+		var formattedSchool = formattedSchoolName + formattedSchoolDegree;
+		var formattedSchoolDates = HTMLschoolDates.replace("%data%", education.schools[edu].dates);
+		var formattedSchoolLocation = HTMLschoolLocation.replace("%data%", education.schools[edu].location);
+		var formattedSchoolMajor = HTMLschoolMajor.replace("%data%", education.schools[edu].majors);
 
-function displayWork() {
+		$(".education-entry:last").append(formattedSchool);
+		$(".education-entry:last").append(formattedSchoolDates);
+		$(".education-entry:last").append(formattedSchoolLocation);
+		$(".education-entry:last").append(formattedSchoolMajor);
+	}
+
+	for (onlineEdu in education.onlineCourses){
+		$("#education").append(HTMLonlineClasses);
+		$("#education").append(HTMLschoolStart);
+		var formattedOnlineTitle = HTMLonlineTitle.replace("%data%", education.onlineCourses[onlineEdu].title);
+		var formattedOnlineSchool = HTMLonlineSchool.replace("%data%", education.onlineCourses[onlineEdu].school);
+		var formattedOnlineDates = HTMLonlineDates.replace("%data%", education.onlineCourses[onlineEdu].date);
+		var formattedOnlineURL = HTMLonlineURL.replace("%data%", education.onlineCourses[onlineEdu].url);
+		var formattedOnlineCourse = formattedOnlineTitle + formattedOnlineSchool;
+
+		$(".education-entry:last").append(formattedOnlineCourse);
+		$(".education-entry:last").append(formattedOnlineDates);
+		$(".education-entry:last").append(formattedOnlineURL);
+	}
+};
+
+work.display = function(){
 	for(job in work.jobs){
 		$("#workExperience").append(HTMLworkStart);
 
@@ -137,11 +164,10 @@ function displayWork() {
 		$(".work-entry:last").append(formattedLocation);
 		$(".work-entry:last").append(formattedDescription);
 	}
-}
+};
 
-displayWork();
 
-function displayProjects(){
+projects.display = function(){
 	for(proj in project.projects){
 		$("#projects").append(HTMLprojectStart);
 
@@ -153,62 +179,16 @@ function displayProjects(){
 		$(".project-entry:last").append(formattedDates);
 		$(".project-entry:last").append(formattedDescription);
 	}
-}
+}; 
 
-displayProjects();
-
-function displayEducation(){
-	for (edu in education.schools){
-		$("#education").append(HTMLschoolStart);
-		var formattedSchoolName = HTMLschoolName.replace("%data%", education.schools[edu].name);
-		var formattedSchoolDegree = HTMLschoolDegree.replace("%data%", education.schools[edu].degree);
-		var formattedSchool = formattedSchoolName + formattedSchoolDegree;
-		var formattedSchoolDates = HTMLschoolDates.replace("%data%", education.schools[edu].dates);
-		var formattedSchoolLocation = HTMLschoolLocation.replace("%data%", education.schools[edu].location);
-		var formattedSchoolMajor = HTMLschoolMajor.replace("%data%", education.schools[edu].major);
-
-		$(".education-entry:last").append(formattedSchool);
-		$(".education-entry:last").append(formattedSchoolDates);
-		$(".education-entry:last").append(formattedSchoolLocation);
-		$(".education-entry:last").append(formattedSchoolMajor);
-	};
-
-	for (onlineEdu in education.onlineCourses){
-		$("#education").append(HTMLonlineClasses);
-		$("#education").append(HTMLschoolStart);
-		var formattedOnlineTitle = HTMLonlineTitle.replace("%data%", education.onlineCourses[onlineEdu].title);
-		var formattedOnlineSchool = HTMLonlineSchool.replace("%data%", education.onlineCourses[onlineEdu].school);
-		var formattedOnlineDates = HTMLonlineDates.replace("%data%", education.onlineCourses[onlineEdu].date);
-		var formattedOnlineURL = HTMLonlineURL.replace("%data%", education.onlineCourses[onlineEdu].url);
-		var formattedOnlineCourse = formattedOnlineTitle + formattedOnlineSchool;
-
-		$(".education-entry:last").append(formattedOnlineCourse);
-		$(".education-entry:last").append(formattedOnlineDates);
-		$(".education-entry:last").append(formattedOnlineURL);
-	};
-}
-
-displayEducation();
+bio.display();
+work.display();
+education.display();
+projects.display();
 
 $("#mapDiv").append(googleMap);
-
-function displayContactInfo(){
-	for(info in bio.contacts){
-		$("#lets-connect").append(HTMLschoolStart);
-	}
-}
-
 
 
 $(document).click(function(loc) {
 	logClicks(loc.pageX, loc.pageY);
 });
-
-
-$("#main").append(internationalizeButton);
-
-function inName(name){
-	var nameArr = name.split(' ');
-	var lastNameUp = nameArr[1].toUpperCase();
-	return nameArr[0] + " " + lastNameUp;
-}
